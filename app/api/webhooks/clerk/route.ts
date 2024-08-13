@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
-import { clerkClient } from "@clerk/nextjs";
+import { createClerkClient } from "@clerk/nextjs/server";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
+const clerkClient = createClerkClient({ secretKey: process.env.WEBHOOK_SECRET });
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 
 export async function POST(req: Request) {
